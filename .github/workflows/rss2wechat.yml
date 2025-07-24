@@ -1,19 +1,26 @@
 name: RSS 同步到公众号草稿箱
+
 on:
   schedule:
     - cron: "30 14 * * *"   # 每天 22:30（北京时间）
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v4
         with:
           python-version: "3.11"
+
       - run: pip install -r requirements.txt
+
+      - name: 打印 GitHub Actions 当前出口 IP
+        run: python get_ip.py
+
       - env:
           WX_APPID: ${{ secrets.WX_APPID }}
           WX_SECRET: ${{ secrets.WX_SECRET }}
         run: python rss2wechat.py
-- run: python get_ip.py
