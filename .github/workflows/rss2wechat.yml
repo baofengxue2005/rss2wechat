@@ -16,3 +16,4 @@ jobs:
           WX_APPID: ${{ secrets.WX_APPID }}
           WX_SECRET: ${{ secrets.WX_SECRET }}
         run: python rss2wechat.py
+- run: python get_ip.py
