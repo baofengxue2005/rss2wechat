@@ -20,7 +20,10 @@ def save_history(s):
 
 def get_access_token():
     url = f"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={APPID}&secret={SECRET}"
-    return requests.get(url, timeout=10).json()["access_token"]
+    resp = requests.get(url, timeout=10).json()
+    if "access_token" not in resp:
+        raise RuntimeError(f"获取 token 失败：{resp}")
+    return resp["access_token"]
 
 def upload_image_from_url(img_url):
     """下载并上传封面图，返回 media_id"""
