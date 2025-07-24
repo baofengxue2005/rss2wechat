@@ -32,7 +32,7 @@ def upload_image_from_url(img_url):
 def create_draft(entries):
     articles = []
     for e in entries[:8]:
-        cover = upload_image_from_url(e.get("media_thumbnail") or "https://via.placeholder.com/300")
+        cover = "0"   # 用公众号默认封面即可
         articles.append({
             "title": e.title,
             "author": "RSS机器人",
